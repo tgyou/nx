@@ -23,7 +23,8 @@ export async function createEmptyWorkspace<T extends CreateWorkspaceOptions>(
   tmpDir: string,
   name: string,
   packageManager: PackageManager,
-  options: T
+  options: T,
+  preset: string
 ): Promise<string> {
   // Ensure to use packageManager for args
   // if it's not already passed in from previous process
@@ -32,6 +33,7 @@ export async function createEmptyWorkspace<T extends CreateWorkspaceOptions>(
   }
 
   const args = unparse({
+    preset,
     ...options,
   }).join(' ');
 

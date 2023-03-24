@@ -39,7 +39,8 @@ export async function createWorkspace<T extends CreateWorkspaceOptions>(
     tmpDir,
     name,
     packageManager,
-    options
+    options,
+    preset
   );
 
   // If the preset is a third-party preset, we need to call createPreset to install it
@@ -62,7 +63,7 @@ export async function createWorkspace<T extends CreateWorkspaceOptions>(
       nxCloud && nxCloudInstallRes.code === 0
     );
   }
-  if (!skipGit) {
+  if (!skipGit && commit) {
     try {
       await initializeGitRepo(directory, { defaultBase, commit });
     } catch (e) {
